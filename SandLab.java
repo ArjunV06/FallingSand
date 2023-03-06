@@ -16,6 +16,7 @@ public class SandLab
   public static final int METAL = 1;
   public static final int SAND = 2;
   public static final int WATER = 3;
+  public static final int BLACKHOLE = 4;
 
   
   //do not add any more fields
@@ -25,11 +26,12 @@ public class SandLab
   public SandLab(int numRows, int numCols)
   {
     String[] names;
-    names = new String[4];
+    names = new String[5];
     names[EMPTY] = "Empty";
     names[METAL] = "Metal";
     names[SAND] = "Sand";
     names[WATER] = "Water";
+    //names[BLACKHOLE] = "Black Hole";
 
     display = new SandDisplay("Falling Sand", numRows, numCols, names);
     grid = new int[numRows][numCols];
@@ -61,19 +63,19 @@ public class SandLab
           break;
           case WATER:
             double random = Math.random();
-            if(random<0.001)
+            if(random<0.01)
             {
               display.setColor(r,c,new Color	(15,94,156));
             }
-            else if(random<0.002)
+            else if(random<0.02)
             {
               display.setColor(r,c,new Color	(35,137,218));
             }
-            else if(random<0.003)
+            else if(random<0.03)
             {
               display.setColor(r,c,new Color	(28,163,236));
             }
-            else if(random<0.004)
+            else if(random<0.04)
             {
               display.setColor(r,c,new Color	(90,188,216));
             }
@@ -112,6 +114,11 @@ public class SandLab
             grid[randY][randX]=EMPTY;
             grid[randY+1][randX]=SAND;
             //System.out.println("HI1");
+          }
+          else if(randY!=grid.length-1 && grid[randY+1][randX]==WATER)
+          {
+            grid[randY][randX]=WATER;
+            grid[randY+1][randX]=SAND;
           }
           //grid[randX][randY+1]=SAND;
         break;
